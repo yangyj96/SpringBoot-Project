@@ -1,0 +1,35 @@
+.search-box {
+    height: 40px;
+    width: 300px;
+    background: #ffffff;
+    border-radius: 40px;
+    padding:10px;
+    border: 1px solid #f9deec;
+}
+
+.search-txt {
+    font-size: 16px;
+    width: 200px;
+    padding: 0px;
+    padding-left: 10px;
+    border: 0px;
+    background: none;
+    outline:  none;
+    float: left;
+    color: #797979;
+}
+
+.search-btn {
+    color: #f9deec;
+    width: 40px;
+    height: 100%;
+    border: 0px;
+    border-radius: 50%;
+    background: #ffffff;
+    outline: none;
+    float: right;
+    font-size:16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
