@@ -9,6 +9,9 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Entity
 @Table(name="item")
@@ -60,4 +63,20 @@ public class Item extends BaseEntity {
         this.stockNumber += stockNumber;
     }
 
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ItemImg> itemImgs = new ArrayList<>();
+
+    public void addItemImg(ItemImg itemImg) {
+        itemImg.setItem(this);
+        itemImgs.add(itemImg);
+    }
+
+    public void removeItemImg(ItemImg itemImg) {
+        itemImg.setItem(null);
+        itemImgs.remove(itemImg);
+    }
+
+    public List<ItemImg> getItemImgs() {
+        return Collections.unmodifiableList(itemImgs);
+    }
 }

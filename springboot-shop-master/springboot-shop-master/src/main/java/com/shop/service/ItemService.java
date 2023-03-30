@@ -85,6 +85,18 @@ public class ItemService {
 
         return item.getId();
     }
+    //상품 삭제
+    public void deleteItem(Long itemId) {
+        // delete all related item images
+        List<ItemImg> itemImages = itemImgRepository.findByItemIdOrderByIdAsc(itemId);
+        for (ItemImg itemImage : itemImages) {
+            itemImgRepository.delete(itemImage);
+        }
+        // delete item
+        itemRepository.deleteById(itemId);
+    }
+
+
 
 
     @Transactional(readOnly = true)

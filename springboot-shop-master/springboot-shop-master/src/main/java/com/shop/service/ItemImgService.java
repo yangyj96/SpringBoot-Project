@@ -1,8 +1,10 @@
 package com.shop.service;
 
 
+import com.shop.entity.Item;
 import com.shop.entity.ItemImg;
 import com.shop.repository.ItemImgRepository;
+import com.shop.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -20,9 +22,11 @@ public class ItemImgService {
     @Value("${itemImgLocation}")
     private String itemImgLocation;
 
+    private  final ItemRepository itemRepository;
     private final ItemImgRepository itemImgRepository;
 
     private final FileService fileService;
+
 
 
     public void saveItemImg(ItemImg itemImg, MultipartFile itemImgFile) throws Exception {
@@ -56,6 +60,16 @@ public class ItemImgService {
             String imgUrl = "/images/item/" + imgName;
             savedItemImg.updateItemImg(oriImgName, imgName, imgUrl);
         }
+    }
+
+    public void deleteItemImg(Long itemImgId) throws EntityNotFoundException {
+        ItemImg itemImg = itemImgRepository.findById(itemImgId)
+                .orElseThrow(EntityNotFoundException::new);
+        Item item = itemRepository.findById(itemImg.getId())
+                .orElseThrow(EntityNotFoundException::new);
+
+        item.removeItemImg(itemImg);
+        itemImgRepository.delete(itemImg);
     }
 
 }

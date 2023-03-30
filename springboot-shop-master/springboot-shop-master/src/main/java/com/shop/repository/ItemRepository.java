@@ -2,6 +2,7 @@ package com.shop.repository;
 
 import com.shop.entity.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
@@ -29,6 +30,10 @@ public interface ItemRepository extends JpaRepository<Item, Long>,
     nativeQuery = true)
     List<Item> findByItemDetailByNative(@Param("itemDetail") String itemDetail);
 
+    //상품 삭제
+    @Modifying
+    @Query("delete from Item i where i.id = :id")
+    void deleteById(@Param("id") Long id);
 
 
 }

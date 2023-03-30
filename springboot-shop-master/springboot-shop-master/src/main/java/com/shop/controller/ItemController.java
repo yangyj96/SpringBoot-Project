@@ -4,6 +4,7 @@ import com.shop.dto.ItemFormDto;
 import com.shop.dto.ItemSearchDto;
 import com.shop.entity.Item;
 import com.shop.entity.ItemImg;
+import com.shop.repository.ItemImgRepository;
 import com.shop.service.ItemImgService;
 import com.shop.service.ItemService;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,8 @@ public class ItemController {
     private final ItemService itemService;
 
     private final ItemImgService itemImgService;
+
+    private final ItemImgRepository itemImgRepository;
 
     //상품등록_GET
     @GetMapping("/admin/item/new")
@@ -102,6 +105,16 @@ public class ItemController {
         }
 
         return "redirect:/";
+    }
+    //상품삭제_POST
+    @PostMapping("/admin/item/delete/{itemId}")
+    public String deleteItem(@PathVariable("itemId") Long itemId) {
+        try {
+            itemService.deleteItem(itemId);
+        } catch (EntityNotFoundException e) {
+            // handle entity not found exception
+        }
+        return "redirect:/admin/items";
     }
 
     //상품 관리
