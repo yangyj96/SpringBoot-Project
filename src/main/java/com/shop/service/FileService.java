@@ -12,7 +12,7 @@ import java.util.UUID;
 public class FileService {
 
     /** 파일 업로드 **/
-    public String uploadFile(String uploadPath, String originalFileName, byte[] fileData) throws Exception {
+    public String uploadFile(String uploadPath, String originalFileName, byte[] fileData, String path) throws Exception {
         UUID uuid = UUID.randomUUID();
         String extension = originalFileName.substring(originalFileName.lastIndexOf("."));  //파일 확장자
         String savedFileName = uuid.toString() + extension;     //저장될 파일 이름

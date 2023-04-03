@@ -13,6 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.util.StringUtils;
 
 import javax.persistence.EntityNotFoundException;
+import javax.servlet.ServletContext;
+import java.io.File;
 
 @Service
 @Transactional
@@ -24,7 +26,7 @@ public class ItemImgService {
 
     private  final ItemRepository itemRepository;
     private final ItemImgRepository itemImgRepository;
-
+    private final ServletContext servletContext;
     private final FileService fileService;
 
 
@@ -34,13 +36,14 @@ public class ItemImgService {
         String imgName = "";
         String imgUrl = "";
 
-        //파일 업로드
+        // 파일 업로드
         if(!StringUtils.isEmpty(oriImgName)) {
-            imgName = fileService.uploadFile(itemImgLocation, oriImgName, itemImgFile.getBytes());
-            imgUrl = "/static/images/item/" + imgName;
+            String path = servletContext.getRealPath("/");
+            imgName = fileService.uploadFile(itemImgLocation, oriImgName, itemImgFile.getBytes(), path);
+            imgUrl = "/images/item/" + imgName; // 수정된 경로
         }
 
-        //상품 이미지 정보 저장
+        // 상품 이미지 정보 저장
         itemImg.updateItemImg(oriImgName, imgName, imgUrl);
         itemImgRepository.save(itemImg);
     }
@@ -50,14 +53,25 @@ public class ItemImgService {
             ItemImg savedItemImg = itemImgRepository.findById(itemImgId)
                     .orElseThrow(EntityNotFoundException::new);
 
-            //기존 이미지 파일 삭제
+            // 기존 이미지 파일 삭제
             if(!StringUtils.isEmpty(savedItemImg.getImgName())) {
-                fileService.deleteFile(itemImgLocation+"/"+savedItemImg.getImgName());
+                String path = servletContext.getRealPath("/");
+                String filePath = path + itemImgLocation + "/" + savedItemImg.getImgName();
+                File file = new File(filePath);
+                if(file.exists() && file.isFile()) {
+                    file.delete();
+                }
             }
 
             String oriImgName = itemImgFile.getOriginalFilename();
-            String imgName = fileService.uploadFile(itemImgLocation, oriImgName, itemImgFile.getBytes());
-            String imgUrl = "/static/images/item/" + imgName;
+            String imgName = "";
+            String imgUrl = "";
+            if(!StringUtils.isEmpty(oriImgName)) {
+                String path = servletContext.getRealPath("/");
+                imgName = fileService.uploadFile(itemImgLocation, oriImgName, itemImgFile.getBytes(), path);
+                imgUrl = "/images/item/" + imgName;
+            }
+
             savedItemImg.updateItemImg(oriImgName, imgName, imgUrl);
         }
     }
