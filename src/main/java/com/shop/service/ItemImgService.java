@@ -25,7 +25,6 @@ public class ItemImgService {
     private  final ItemRepository itemRepository;
     private final ItemImgRepository itemImgRepository;
 
-
     private final FileService fileService;
 
 
