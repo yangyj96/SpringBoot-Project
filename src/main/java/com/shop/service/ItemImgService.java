@@ -25,6 +25,7 @@ public class ItemImgService {
     private  final ItemRepository itemRepository;
     private final ItemImgRepository itemImgRepository;
 
+
     private final FileService fileService;
 
 
@@ -57,7 +58,7 @@ public class ItemImgService {
 
             String oriImgName = itemImgFile.getOriginalFilename();
             String imgName = fileService.uploadFile(itemImgLocation, oriImgName, itemImgFile.getBytes());
-            String imgUrl = "/images/item/" + imgName;
+            String imgUrl = "/images/" + imgName;
             savedItemImg.updateItemImg(oriImgName, imgName, imgUrl);
         }
     }
