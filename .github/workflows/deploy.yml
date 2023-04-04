@@ -1,0 +1,41 @@
+name: Deploy to cloudtype
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Connect deploy key
+        uses: cloudtype-github-actions/connect@v1
+        with:
+          token: ${{ secrets.CLOUDTYPE_TOKEN }}
+          ghtoken: ${{ secrets.GHP_TOKEN }}
+      - name: Deploy
+        uses: cloudtype-github-actions/deploy@v1
+        with:
+          token: ${{ secrets.CLOUDTYPE_TOKEN }}
+          project: yangyj969796/creativemarket
+          stage: main
+          yaml: |
+            name: creativemarket
+            app: java@11
+            options:
+              ports: "8080"
+              env:
+                - name: DB_HOST
+                  value: svc.sel3.cloudtype.app
+                - name: DB_PORT
+                  value: "31159"
+                - name: DB_USERNAME
+                  value: root
+                - name: DB_PASSWORD
+                  value: "12345"
+            context:
+              git:
+                url: git@github.com:${{ github.repository }}.git
+                ref: ${{ github.ref }}
+              preset: java-springboot
