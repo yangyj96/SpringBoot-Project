@@ -15,7 +15,7 @@ Creative Market
 * JAVA 11
 * SpringBoot
 * Spring Data JPA
-* MySQL
+* MariaDB
 
 ### [Front-End]
 * Thymeleaf
