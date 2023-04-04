@@ -1,6 +1,7 @@
 # SpringBoot 쇼핑몰 프로젝트
 
 스프링부트로 제작한 애플리케이션 쇼핑몰입니다.
+Creative Market
 
 ## 개발 환경
 * Java 11
