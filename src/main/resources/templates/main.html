@@ -51,10 +51,10 @@
     <div class="content" style="margin-top:15px;">
     <div class="row">
         <th:block th:each="item, status : ${items.getContent()}">
-            <div class="col-md-4 margin">
+            <div class="col-md-2 margin">
                 <div class="card">
                     <a th:href="'/item/' + ${item.id}" class="text-dark">
-                        <img th:src="${item.imgUrl}" class="card-img-top" th:alt="${item.itemNm}" style="height:300px;">
+                        <img th:src="${item.imgUrl}" class="card-img-top" th:alt="${item.itemNm}" style="height:200px;">
                         <div class="card-body">
                             <h5 class="card-title">[[${item.itemNm}]]</h5>
                             <p class="card-text">[[${item.itemDetail}]]</p>

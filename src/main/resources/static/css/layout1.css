@@ -24,3 +24,7 @@ body {
     margin-left: 200px;
     margin-right: 200px;
 }
+
+.col-md-4 margin {
+    width: 20%;
+}
