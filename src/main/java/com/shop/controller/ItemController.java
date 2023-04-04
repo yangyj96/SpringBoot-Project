@@ -120,7 +120,7 @@ public class ItemController {
     //상품 관리
     @GetMapping(value = {"/admin/items", "/admin/items/{page}"})
     public String itemManage(ItemSearchDto itemSearchDto, @PathVariable("page") Optional<Integer> page, Model model) {
-        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 3);
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5);
         Page<Item> items = itemService.getAdminItemPage(itemSearchDto, pageable);
         model.addAttribute("items", items);                 //조회한 상품 데이터 및 페이징 정보를 뷰에 전달
         model.addAttribute("itemSearchDto", itemSearchDto);
