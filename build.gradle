@@ -43,6 +43,7 @@ dependencies {
 	implementation 'org.springframework.security:spring-security-test'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.9'
+	implementation 'org.springframework.boot:spring-boot-devtools'
 }
 
 tasks.named('test') {
