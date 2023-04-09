@@ -1,7 +1,7 @@
 # SpringBoot 마켓 프로젝트
 
 스프링부트로 제작한 애플리케이션 마켓 프로젝트 입니다.
-Creative Market
+* Creative Market
 
 ## 개발 환경
 * Java 11
