@@ -7,7 +7,7 @@
 - Java 11
 - Server : Apache Tomcat 9.0
 - Framework : Springboot, JPA
-- Database: MySQL
+- Database: MariaDB
 - IDE : IntelliJ
 
 ## 사용 기술
