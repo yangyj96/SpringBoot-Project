@@ -1,8 +1,7 @@
 # Creative Market
 
-- SpringBoot로 제작한 애플리케이션 마켓 프로젝트 입니다.
-
-
+- SpringBoot로 제작한 
+- 애플리케이션 마켓 프로젝트 입니다.
 
 ## 개발 환경
 
